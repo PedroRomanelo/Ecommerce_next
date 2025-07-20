@@ -1,4 +1,4 @@
-import { defaultConfig } from "next/dist/server/config-shared"
+import { SignedIn, SignedOut, UserButton, SignInButton } from "@clerk/nextjs"
 import Link from "next/link"
 function Navbar() {
     return (
@@ -9,6 +9,18 @@ function Navbar() {
           >
           Kamizetaz
           </Link>
+          <div className='flex items-center gap-8'>
+            <SignedIn>
+                <UserButton></UserButton>
+            </SignedIn>
+            <SignedOut>
+                <SignInButton mode='modal'>
+                <button className="uppercase rounded-md cursor-pointer border border-gray-400 px-3 py-2">
+                    fazer login
+                </button>
+                </SignInButton>
+            </SignedOut>
+          </div>
         </nav>
     )
 }
