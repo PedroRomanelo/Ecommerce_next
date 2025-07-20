@@ -1,14 +1,30 @@
 import { ProductType } from "@/types/ProductType";
 import Product from "./components/Product";
+import Stripe from "stripe";
 
-async function getProducts() {
-  const res = await fetch('https://fakestoreapi.com/products')
-  if (!res.ok) { //.ok é uma propriedade booleana do objeto Response retornado pelo fetch. Indica se a resposta foi bem-sucedida (status HTTP entre 200 e 299).
-    throw new Error('failed to fetch data')
-  }
-  return res.json() //.json() é um método do objeto Response que lê o corpo da resposta e o transforma em um objeto JavaScript (caso o conteúdo seja JSON). 
-  //Converte os dados da API (que vêm em formato JSON como texto) em algo que o JavaScript possa manipular diretamente, como arrays ou objetos.
-  //retorna uma promisse, que se resolve com os dados convertidos.
+async function getProducts(): Promise<ProductType[]> {
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+    apiVersion: "2025-06-30.basil",
+  });
+
+  const products = await stripe.products.list();
+  const formatedProducts = await Promise.all(
+    products.data.map(async (product: Stripe.Product) => {
+      const price = await stripe.prices.list({
+        product: product.id,
+      });
+      return {
+        id: product.id,
+        price: price.data[0].unit_amount,
+        name: product.name,
+        image: product.images[0],
+        description: product.description,
+        currency: price.data[0].currency,
+      };
+    })
+  );
+  
+  return formatedProducts;
 }
 
 
