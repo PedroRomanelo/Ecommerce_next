@@ -20,7 +20,7 @@ function Navbar() {
           </SignedIn>
           <SignedOut>
             <SignInButton mode='modal'>
-              <button className='border rounded-md border-gray-400 px-3 py-2'>
+              <button className='border rounded-md border-gray-400 px-3 py-2 cursor-pointer'>
                 Fazer Login
               </button>
             </SignInButton>

@@ -29,7 +29,7 @@ export default function CheckoutButton({ totalPrice }: CheckoutButtonProps) {
       </p>
       <button
         onClick={handleCheckout}
-        className='w-full rounded-md bg-teal-600 text-white py-2 mt-2'
+        className='w-full rounded-md bg-teal-600 text-white py-2 mt-2 cursor-pointer'
       >
         Finalizar Compra
       </button>

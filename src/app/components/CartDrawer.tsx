@@ -29,7 +29,7 @@ export default function CartDrawer() {
       >
         <button
           onClick={() => useStore.toggleCart()}
-          className='font-bold text-sm text-teal-600'
+          className='font-bold text-sm text-teal-600 cursor-pointer'
         >
           Voltar para loja
         </button>
@@ -57,14 +57,14 @@ export default function CartDrawer() {
                     {formatPrice(item.price)}
                   </p>
                   <button
-                    className='py-1 px-2 border rounded-md mt-2 text-sm mr-1'
+                    className='py-1 px-2 border rounded-md mt-2 text-sm mr-1 cursor-pointer'
                     onClick={() => useStore.addProduct(item)}
                   >
                     Adicionar
                   </button>
                   <button
                     onClick={() => useStore.removeProduct(item)}
-                    className='py-1 px-2 border rounded-md mt-2 text-sm'
+                    className='py-1 px-2 border rounded-md mt-2 text-sm cursor-pointer'
                   >
                     Remover
                   </button>
